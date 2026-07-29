@@ -26,8 +26,14 @@ const setListTemplate = (set) => `
 class ListSets {
   constructor() {
     this.sets = [];
-    this.currentPage = 1;
-    this.itemsPerPage = 9;
+    this.apiClient = new ApiClient();
+
+    // Initialize from URL params or use defaults
+    const urlParams = this.apiClient.getCurrentUrlParams();
+    this.currentPage = urlParams.page;
+    this.itemsPerPage = urlParams.itemsPerPage;
+    this.sortField = urlParams.sortField;
+    this.sortOrder = urlParams.sortOrder;
     this.hasNextPage = true; // Track if there are more pages available
   }
 
@@ -36,12 +42,13 @@ class ListSets {
     this.sets = await this.getSets();
   };
 
-  getSets = async (page = null) => {
-    const apiClient = new ApiClient();
+  getSets = async () => {
     const sets = await getListSets(
-      apiClient,
-      page ?? this.currentPage,
+      this.apiClient,
+      this.currentPage,
       this.itemsPerPage,
+      this.sortField,
+      this.sortOrder,
     );
     return sets;
   };
@@ -63,14 +70,17 @@ class ListSets {
     });
 
     nextPaginate.addEventListener("click", async () => {
-      const sets = await this.getSets(this.currentPage + 1);
+      this.currentPage++;
+      const sets = await this.getSets();
+
       if (sets.length > 0) {
-        this.currentPage++;
         this.sets = sets;
         this.hasNextPage = sets.length === this.itemsPerPage; // If less than full page, likely at the end
         this.updatePaginationState(prevPaginate, nextPaginate);
         this.render();
       } else {
+        // No results, revert the page increment
+        this.currentPage--;
         this.hasNextPage = false; // No more pages available
         this.updatePaginationState(prevPaginate, nextPaginate);
       }
