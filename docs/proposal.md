@@ -31,6 +31,14 @@ This application is targeted at gamers and collectors of the Pokemon Trading Car
    they belong to with the goal to catch the interest of different card just for the curiosity or fun of knowing
    about something new.
 
+5. Detailed card information: the application will provide a detailed information about each card including the estimated price, when available, and if possible the number of cards that should be available on the market.
+
+6. Save favorite sets: the application will provide an option to favorite sets of cards to allow the user to list the sets they like and want to keep track of the collection they are interested in.
+
+7. Save wishlist cards: the application will provide an option to wishlist cards to allow the user to list the cards they want to keep track of the cards they are interested in.
+
+8. Filter by card type: the application will provide an option to filter the cards by type to allow the user to list the cards they are interested in.
+
 ## Wireframes
 
 ![Desktop and Mobile Wireframe](./images/wireframe.png)
@@ -41,12 +49,24 @@ This application is targeted at gamers and collectors of the Pokemon Trading Car
   multiple requests for the same resource.
 - PokeAPI: as an alternative source to fetch Pokemon details and information for a given pokemon card.
 
+Store Data: list of sets and cards will be stored in a JSON file, list of favorite sets and wishlist cards will be stored in the local storage of the browser.
+
+Data Properties:
+
+- Set: id, name, releaseDate, serie, symbol, cards, cardCount
+- Card: id, name, description, category, image, rarity, set, hp, types, attacks, weakenesses
+
 ## Module List
 
 **UI Module**: handles the users interface elements and interactions with the user.
 **API Module**: handles the requests to external resources with proper error handling and feedback to the end user.
 **Event Handling Module**: handles the interaction with the users and the events triggered by the actions requested by the user.
 **Animation Module**: implements the CSS animations and transitions to provide visual experience to the user.
+
+CSS: main.css, card.css, set.css, random.css, and animation.css files to provide the styling for the application.
+JavaScript: main.js, api.js, ui.js, event.js, and animation.js files to provide the functionality for the application.
+HTML: index.html, set.html, card.html, and random.html files to provide the structure for the application.
+JSON: data.json file to provide the list of sets and cards to fetch the information from the external resources and provide some quick access to the information for the application.
 
 ## Graphic Identity
 
