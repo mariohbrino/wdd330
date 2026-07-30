@@ -59,6 +59,16 @@ class ListSets {
 
     this.updatePaginationState(prevPaginate, nextPaginate);
 
+    this.handlePrevPagination(prevPaginate, nextPaginate);
+    this.handleNextPagination(nextPaginate, prevPaginate);
+  };
+
+  updatePaginationState = (prevBtn, nextBtn) => {
+    prevBtn.disabled = this.currentPage === 1;
+    nextBtn.disabled = !this.hasNextPage;
+  };
+
+  handlePrevPagination = (prevPaginate, nextPaginate) => {
     prevPaginate.addEventListener("click", async () => {
       if (this.currentPage > 1) {
         this.currentPage--;
@@ -68,7 +78,9 @@ class ListSets {
         this.render();
       }
     });
+  };
 
+  handleNextPagination = (nextPaginate, prevPaginate) => {
     nextPaginate.addEventListener("click", async () => {
       this.currentPage++;
       const sets = await this.getSets();
@@ -87,18 +99,13 @@ class ListSets {
     });
   };
 
-  updatePaginationState = (prevBtn, nextBtn) => {
-    prevBtn.disabled = this.currentPage === 1;
-    nextBtn.disabled = !this.hasNextPage;
-  };
-
-  render() {
+  render = () => {
     const listSet = document.getElementById("list-set");
     listSet.innerHTML = ""; // Clear the list before rendering new sets
     this.sets.forEach((set) => {
       listSet.insertAdjacentHTML("beforeend", setListTemplate(set));
     });
-  }
+  };
 }
 
 const displaySets = async () => {
