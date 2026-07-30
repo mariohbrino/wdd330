@@ -19,6 +19,7 @@ const setListTemplate = (set) => `
       <h2 class="set-name">${set.name}</h2>
       <p><strong>Total Cards:</strong> ${set.cardCount.total}</p>
       <p><strong>Official Total:</strong> ${set.cardCount.official}</p>
+      <p><strong>Available logo:</strong> ${set.logo ? "Yes" : "No"}</p>
     </div>
   </li>
 `;
