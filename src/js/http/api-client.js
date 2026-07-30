@@ -20,11 +20,11 @@ class ApiClient {
     return response;
   }
 
-  getCurrentUrlParams() {
+  getCurrentUrlParams(perPageDefault = 9) {
     const currentUrl = new URL(window.location.href);
     const page = parseInt(currentUrl.searchParams.get("page")) || 1;
     const itemsPerPage =
-      parseInt(currentUrl.searchParams.get("itemsPerPage")) || 9;
+      parseInt(currentUrl.searchParams.get("itemsPerPage")) || perPageDefault;
     const sortField = currentUrl.searchParams.get("sort") || "name";
     const sortOrder = currentUrl.searchParams.get("order") || orderEnum.asc;
 

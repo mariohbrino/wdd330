@@ -26,12 +26,12 @@ const setListTemplate = (set) => `
 `;
 
 class ListSets {
-  constructor() {
+  constructor(defaultItemsPerPage = 6) {
     this.sets = [];
     this.apiClient = new ApiClient();
 
     // Initialize from URL params or use defaults
-    const urlParams = this.apiClient.getCurrentUrlParams();
+    const urlParams = this.apiClient.getCurrentUrlParams(defaultItemsPerPage);
     this.currentPage = urlParams.page;
     this.itemsPerPage = urlParams.itemsPerPage;
     this.sortField = urlParams.sortField;
@@ -114,8 +114,8 @@ class ListSets {
   };
 }
 
-const displaySets = async () => {
-  const listSets = new ListSets();
+const displaySets = async (defaultItemsPerPage = 6) => {
+  const listSets = new ListSets(defaultItemsPerPage);
   await listSets.init();
   await listSets.render();
 };
