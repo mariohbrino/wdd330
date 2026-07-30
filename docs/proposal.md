@@ -17,19 +17,13 @@ This application is targeted at gamers and collectors of the Pokemon Trading Car
 
 ## Major Functions
 
-1. List of Pokemon Card Sets: the application will provide a list of the card sets available with a
-   brief description of each set and the expected cards for each set.
+1. List of Pokemon Card Sets: the application will provide a list of the card sets available with a brief description of each set and the expected cards for each set.
 
-2. List of cards per set: the application will provide a list of cards per set with detailed information
-   about each card including the estimated price, when available, and if possible the number of cards that
-   should be available on the market.
+2. List of cards per set: the application will provide a list of cards per set with detailed information about each card including the estimated price, when available, and if possible the number of cards that should be available on the market.
 
-3. Links to external resources: the application will provide links for external resources, when available,
-   to provide alternative sources with specific information that's not provided on the application.
+3. Links to external resources: the application will provide links for external resources, when available, to provide alternative sources with specific information that's not provided on the application.
 
-4. Random card picker: the application will provide a list of random cards with the indication of the set
-   they belong to with the goal to catch the interest of different card just for the curiosity or fun of knowing
-   about something new.
+4. Random card picker: the application will provide a list of random cards with the indication of the set they belong to with the goal to catch the interest of different card just for the curiosity or fun of knowing about something new.
 
 5. Detailed card information: the application will provide a detailed information about each card including the estimated price, when available, and if possible the number of cards that should be available on the market.
 
