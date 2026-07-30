@@ -12,13 +12,13 @@ const setLogoTemplate = (logoUrl) => {
 
 const setListTemplate = (set) => `
   <li class="set-item">
-    <div class="set-header">
+    <div class="set-image">
       ${setLogoTemplate(set.logo)}
-      <h2 class="set-name">${set.name}</h2>
     </div>
     <div class="set-details">
-      <p>Total Cards: ${set.cardCount.total}</p>
-      <p>Official Total: ${set.cardCount.official}</p>
+      <h2 class="set-name">${set.name}</h2>
+      <p><strong>Total Cards:</strong> ${set.cardCount.total}</p>
+      <p><strong>Official Total:</strong> ${set.cardCount.official}</p>
     </div>
   </li>
 `;
