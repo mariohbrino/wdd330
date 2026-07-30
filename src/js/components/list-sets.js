@@ -2,6 +2,7 @@ import "../../css/sets.css";
 
 import ApiClient from "../http/api-client";
 import { getListSets } from "../services/sets";
+import ListContainer from "./list-container";
 
 const setLogoTemplate = (logoUrl) => {
   if (logoUrl) {
@@ -103,16 +104,20 @@ class ListSets {
   render = () => {
     const listSet = document.getElementById("list-set");
     listSet.innerHTML = ""; // Clear the list before rendering new sets
-    this.sets.forEach((set) => {
-      listSet.insertAdjacentHTML("beforeend", setListTemplate(set));
-    });
+    const listContainer = new ListContainer(
+      listSet,
+      this.sets.map((set) => setListTemplate(set)),
+      document.getElementById("set-placeholder-template"),
+      this.sets.length,
+    );
+    return listContainer.render();
   };
 }
 
 const displaySets = async () => {
   const listSets = new ListSets();
   await listSets.init();
-  listSets.render();
+  await listSets.render();
 };
 
 export { displaySets };

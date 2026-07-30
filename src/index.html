@@ -23,6 +23,17 @@
       <main>
         <h1>List of Sets</h1>
         <ul id="list-set" class="list-set"></ul>
+        <template id="set-placeholder-template">
+          <li class="set-item placeholder" aria-hidden="true">
+            <div class="set-image placeholder-block"></div>
+            <div class="set-details">
+              <span class="placeholder-line placeholder-title"></span>
+              <span class="placeholder-line"></span>
+              <span class="placeholder-line"></span>
+              <span class="placeholder-line"></span>
+            </div>
+          </li>
+        </template>
         <div id="pagination" class="pagination">
           <button id="prev-paginate" class="pagination-button" disabled>
             <svg

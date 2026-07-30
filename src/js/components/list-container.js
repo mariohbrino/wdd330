@@ -1,0 +1,53 @@
+class ListContainer {
+  constructor(container, items, placeHolderTemplate, placeHolderCount = 9) {
+    this.container = container;
+    this.items = items;
+    this.placeHolderTemplate = placeHolderTemplate;
+    this.placeHolderCount = placeHolderCount;
+  }
+
+  clearContainer() {
+    this.container.innerHTML = "";
+  }
+
+  delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  injectPlaceholders() {
+    for (let index = 0; index < this.placeHolderCount; index++) {
+      this.container.appendChild(
+        this.placeHolderTemplate.content.cloneNode(true),
+      );
+    }
+  }
+
+  getPlaceHolders = () => this.container.querySelectorAll(".placeholder");
+
+  renderItems = async () => {
+    const placeholders = this.getPlaceHolders();
+
+    for (let index = 0; index < placeholders.length; index++) {
+      const placeholder = placeholders[index];
+
+      if (this.items[index]) {
+        await this.delay(350);
+
+        const itemTemplate = document.createElement("template");
+        itemTemplate.innerHTML = this.items[index].trim();
+        const newItem = itemTemplate.content.firstElementChild;
+        newItem.classList.add("loaded-item");
+
+        placeholder.replaceWith(newItem);
+      } else {
+        throw new Error("Not enough items to fill placeholders");
+      }
+    }
+  };
+
+  render = () => {
+    this.clearContainer();
+    this.injectPlaceholders();
+    return this.renderItems();
+  };
+}
+
+export default ListContainer;
