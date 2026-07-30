@@ -1,9 +1,16 @@
 class ListContainer {
-  constructor(container, items, placeHolderTemplate, placeHolderCount = 9) {
+  constructor(
+    container,
+    items,
+    placeHolderTemplate,
+    placeHolderCount = 9,
+    delay = 150,
+  ) {
     this.container = container;
     this.items = items;
     this.placeHolderTemplate = placeHolderTemplate;
     this.placeHolderCount = placeHolderCount;
+    this.delayDuration = delay;
   }
 
   clearContainer() {
@@ -29,7 +36,7 @@ class ListContainer {
       const placeholder = placeholders[index];
 
       if (this.items[index]) {
-        await this.delay(350);
+        await this.delay(this.delayDuration);
 
         const itemTemplate = document.createElement("template");
         itemTemplate.innerHTML = this.items[index].trim();
