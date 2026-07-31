@@ -193,6 +193,64 @@ section {
   }
 }
 
+.image-modal {
+  position: fixed;
+  inset: 0;
+  width: min(720px, calc(100% - 2rem));
+  max-height: calc(100svh - 2rem);
+  margin: auto;
+  padding: 1.25rem;
+  border: none;
+  border-radius: 8px;
+  box-sizing: border-box;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  overflow: auto;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px);
+  }
+
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+      margin: 0;
+      text-align: center;
+    }
+
+    #modal-image {
+      display: flex;
+      min-height: 0;
+      justify-content: center;
+
+      img {
+        display: block;
+        max-width: 100%;
+        max-height: calc(100svh - 10rem);
+        object-fit: contain;
+      }
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--background-color-1);
+      background-color: var(--third-color);
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        background-color: var(--accent-third);
+        box-shadow: 0 4px 12px rgb(20 54 66 / 12%);
+      }
+    }
+  }
+}
+
 @keyframes placeholder-loading {
   from {
     background-position: 200% 0;
