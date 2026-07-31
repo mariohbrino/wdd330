@@ -60,7 +60,7 @@ h3 {
 a {
   text-decoration: none;
   font-weight: 500;
-  color: var(--accent-third);
+  color: var(--accent-color);
 }
 
 #app {

@@ -5,20 +5,14 @@
   border-radius: 1rem;
   align-items: center;
   justify-content: center;
-  color: var(--background-color);
+  color: var(--accent-color);
   background-color: var(--accent-third);
   transition: background-color 0.2s ease;
 }
 
 .coolors-container:hover {
-  color: var(--background-color);
-  background-color: var(--accent-third);
-  box-shadow: inset 0 0 0 3px var(--third-color);
-}
-
-.coolors-container:focus-visible {
-  outline: 3px solid var(--primary-color);
-  outline-offset: 2px;
+  filter: brightness(1.2);
+  box-shadow: 1px 3px 5px rgba(54, 54, 54, 0.3);
 }
 
 .color-schema {
