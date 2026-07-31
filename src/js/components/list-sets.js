@@ -2,7 +2,8 @@ import "../../css/sets.css";
 
 import ApiClient from "../http/api-client";
 import { getListSets } from "../services/sets";
-import ListContainer, { createPlaceholder } from "./list-container";
+import { createPlaceholder } from "../utils/placeholder";
+import ListContainer from "./list-container";
 
 const setLogoTemplate = (logoUrl) => {
   if (logoUrl) {
