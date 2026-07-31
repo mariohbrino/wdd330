@@ -2,7 +2,7 @@ import "../../css/sets.css";
 
 import ApiClient from "../http/api-client";
 import { getListSets } from "../services/sets";
-import ListContainer from "./list-container";
+import ListContainer, { createPlaceholder } from "./list-container";
 
 const setLogoTemplate = (logoUrl) => {
   if (logoUrl) {
@@ -115,6 +115,11 @@ class ListSets {
 }
 
 const displaySets = async (defaultItemsPerPage = 6) => {
+  const listSetElement = document.getElementById("list-set");
+  const placeHolderTemplate = document.getElementById(
+    "set-placeholder-template",
+  );
+  createPlaceholder(listSetElement, placeHolderTemplate, defaultItemsPerPage);
   const listSets = new ListSets(defaultItemsPerPage);
   await listSets.init();
   await listSets.render();

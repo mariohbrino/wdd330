@@ -1,3 +1,13 @@
+const createPlaceholder = (
+  container,
+  placeHolderTemplate,
+  placeHolderCount,
+) => {
+  for (let index = 0; index < placeHolderCount; index++) {
+    container.appendChild(placeHolderTemplate.content.cloneNode(true));
+  }
+};
+
 class ListContainer {
   constructor(
     container,
@@ -20,11 +30,11 @@ class ListContainer {
   delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
   injectPlaceholders() {
-    for (let index = 0; index < this.placeHolderCount; index++) {
-      this.container.appendChild(
-        this.placeHolderTemplate.content.cloneNode(true),
-      );
-    }
+    createPlaceholder(
+      this.container,
+      this.placeHolderTemplate,
+      this.placeHolderCount,
+    );
   }
 
   getPlaceHolders = () => this.container.querySelectorAll(".placeholder");
@@ -58,3 +68,5 @@ class ListContainer {
 }
 
 export default ListContainer;
+
+export { createPlaceholder };
