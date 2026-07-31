@@ -11,7 +11,7 @@
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .set-item {
+  .card-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,7 +34,7 @@
       font-size: 1rem;
     }
 
-    .set-image {
+    .card-image {
       width: 100%;
       height: 200px;
       display: flex;
@@ -54,7 +54,7 @@
       }
     }
 
-    .set-details {
+    .card-details {
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -68,7 +68,7 @@
 
       font-weight: 400;
 
-      .set-name {
+      .card-name {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -83,40 +83,10 @@
       }
     }
 
-    .set-actions {
-      width: 100%;
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-
-      .set-link {
-        width: 100%;
-        height: 100%;
-        padding: 1rem;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 0 0 0.3rem 0.3rem;
-        box-sizing: border-box;
-        text-decoration: none;
-        color: var(--text-color);
-        background-color: var(--primary-color);
-        font-weight: 500;
-        transition:
-          background-color 0.5s ease,
-          color 0.5s ease;
-
-        &:hover {
-          filter: brightness(1.1);
-        }
-      }
-    }
-
     &:hover {
       border-color: var(--third-color);
 
-      .set-name {
+      .card-name {
         color: var(--third-color);
       }
     }

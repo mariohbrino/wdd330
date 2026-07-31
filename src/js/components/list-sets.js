@@ -7,9 +7,9 @@ import { renderContainer } from "./render-container";
 
 const setLogoTemplate = (logoUrl) => {
   if (logoUrl) {
-    return `<img src="${logoUrl}.png" alt="Set Logo" class="set-logo">`;
+    return `<img src="${logoUrl}.webp" alt="Set Logo" class="set-logo">`;
   }
-  return "<img src='https://assets.tcgdex.net/en/base/base1/logo.png' alt='No Logo Available' class='set-logo'>";
+  return "<img src='https://assets.tcgdex.net/en/base/base1/logo.webp' alt='No Logo Available' class='set-logo'>";
 };
 
 const setListTemplate = (set) => `
@@ -23,6 +23,9 @@ const setListTemplate = (set) => `
       <p><strong>Official Total:</strong> ${set.cardCount.official}</p>
       <p><strong>Available logo:</strong> ${set.logo ? "Yes" : "No"}</p>
     </div>
+    <div class="set-actions">
+      <a href="./set.html?id=${set.id}" class="set-link">View</a>
+    </div>
   </li>
 `;
 
@@ -34,7 +37,9 @@ const displaySets = async (defaultItemsPerPage = 6) => {
 
   const listSets = new ListResource(getListSets, defaultItemsPerPage);
   await listSets.init();
-  await listSets.render(renderContainer(element, placeholder, setListTemplate));
+  await listSets.render(
+    renderContainer(element, placeholder, setListTemplate, 50),
+  );
 };
 
 export { displaySets };

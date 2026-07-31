@@ -1,11 +1,19 @@
 import ApiClient from "../http/api-client";
 
 class ListResource {
-  constructor(getResourcesCallback, defaultItemsPerPage = 6) {
+  constructor(
+    getResourcesCallback,
+    defaultItemsPerPage = 6,
+    resourceId = null,
+    resourceKey = null,
+  ) {
+    this.resourceId = resourceId;
+    this.resourceKey = resourceKey;
     this.getResourcesCallback = getResourcesCallback;
     this.apiClient = new ApiClient();
     this.renderCallback = null;
     this.items = [];
+    this.data = null;
 
     // Initialize from URL params or use defaults
     const urlParams = this.apiClient.getCurrentUrlParams(defaultItemsPerPage);
@@ -17,18 +25,40 @@ class ListResource {
   }
 
   init = async () => {
+    await this.fetchItems();
     this.listenPagination();
-    await this.getItems();
   };
 
-  getItems = async () => {
-    this.items = await this.getResourcesCallback(
-      this.apiClient,
+  getItems = () => this.items;
+
+  getData = () => this.data;
+
+  fetchItems = async () => {
+    const params = [this.apiClient];
+
+    if (this.resourceId) {
+      params.push(this.resourceId);
+    }
+
+    params.push(
       this.currentPage,
       this.itemsPerPage,
       this.sortField,
       this.sortOrder,
     );
+
+    this.data = await this.getResourcesCallback(...params);
+
+    if (this.resourceKey) {
+      const resources = this.data[this.resourceKey] ?? [];
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+
+      this.items = resources.slice(startIndex, endIndex);
+      this.hasNextPage = endIndex < resources.length;
+    } else {
+      this.items = this.data;
+    }
   };
 
   listenPagination = () => {
@@ -50,7 +80,7 @@ class ListResource {
     prevPaginate.addEventListener("click", async () => {
       if (this.currentPage > 1) {
         this.currentPage--;
-        await this.getItems();
+        await this.fetchItems();
         this.hasNextPage = true; // Going back means there's at least one page forward
         this.updatePaginationState(prevPaginate, nextPaginate);
         await this.render();
@@ -61,10 +91,12 @@ class ListResource {
   handleNextPagination = (nextPaginate, prevPaginate) => {
     nextPaginate.addEventListener("click", async () => {
       this.currentPage++;
-      await this.getItems();
+      await this.fetchItems();
 
       if (this.items.length > 0) {
-        this.hasNextPage = this.items.length === this.itemsPerPage; // If less than full page, likely at the end
+        if (!this.resourceKey) {
+          this.hasNextPage = this.items.length === this.itemsPerPage;
+        }
         this.updatePaginationState(prevPaginate, nextPaginate);
         await this.render();
       } else {
