@@ -12,6 +12,7 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "src/index.html"),
         set: resolve(__dirname, "src/set.html"),
+        card: resolve(__dirname, "src/card.html"),
         cards: resolve(__dirname, "src/cards.html"),
         siteplan: resolve(__dirname, "src/siteplan.html"),
       },

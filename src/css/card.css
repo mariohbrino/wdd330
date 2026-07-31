@@ -1,0 +1,410 @@
+.card-details {
+  width: 100%;
+  max-width: 960px;
+  min-height: 520px;
+  margin: 1rem auto;
+  box-sizing: border-box;
+
+  .card-detail {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.82fr) minmax(0, 1.4fr);
+    align-items: start;
+    overflow: hidden;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    background-color: var(--background-color-1);
+    box-shadow: 0 12px 32px rgb(20 54 66 / 10%);
+  }
+
+  .card-detail-media {
+    align-self: start;
+    min-width: 0;
+    aspect-ratio: 245 / 342;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    box-sizing: border-box;
+    background-color: var(--accent-third);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 12px rgb(0 0 0 / 28%));
+    }
+
+    .card-detail-image-placeholder {
+      color: var(--background-color-1);
+    }
+  }
+
+  .card-detail-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    box-sizing: border-box;
+  }
+
+  .card-detail-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+
+    h2 {
+      margin: 0;
+      font-size: 2rem;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+      color: var(--accent-third);
+    }
+
+    p {
+      color: var(--paragraph-color);
+      line-height: 1.55;
+    }
+
+    .card-detail-eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+      color: var(--third-color);
+    }
+  }
+
+  .card-detail-info {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0;
+    border-top: 1px solid var(--accent-color);
+    border-left: 1px solid var(--accent-color);
+
+    > div {
+      min-width: 0;
+      padding: 0.75rem;
+      border-right: 1px solid var(--accent-color);
+      border-bottom: 1px solid var(--accent-color);
+      background-color: var(--background-color-2);
+    }
+
+    > div:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    dt {
+      margin-bottom: 0.2rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-third);
+    }
+
+    dd {
+      overflow-wrap: anywhere;
+      color: var(--heading-color);
+    }
+  }
+
+  .card-detail-footer {
+    grid-column: 1 / -1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 2rem 2rem;
+    box-sizing: border-box;
+    border-top: 1px solid var(--accent-color);
+    background-color: var(--background-color-2);
+
+    .card-detail-groups {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+
+      h3 {
+        margin: 0;
+        font-size: 0.9rem;
+        color: var(--heading-color);
+      }
+    }
+  }
+
+  .card-detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+
+    > li {
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--accent-secondary);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      line-height: 1.2;
+      color: var(--accent-third);
+      background-color: var(--accent-primary);
+    }
+  }
+
+  .card-detail-empty {
+    display: inline-block;
+    padding: 0.35rem 0.65rem;
+    border: 1px solid var(--accent-secondary);
+    border-radius: 999px;
+    font-size: 0.85rem;
+    color: var(--accent-third);
+    background-color: var(--accent-primary);
+  }
+
+  .card-detail-combat-stats {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(220px, 0.8fr);
+    align-items: start;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding: 2rem;
+    box-sizing: border-box;
+    border: 1px solid var(--accent-color);
+    border-radius: 8px;
+    background-color: var(--background-color-1);
+    box-shadow: 0 12px 32px rgb(20 54 66 / 8%);
+
+    section {
+      min-width: 0;
+    }
+
+    h3 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      color: var(--accent-third);
+    }
+
+    ul {
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    section > ul > li {
+      min-width: 0;
+      padding: 1rem;
+      box-sizing: border-box;
+      border-left: 3px solid var(--third-color);
+      background-color: var(--background-color-2);
+    }
+
+    .combat-stat-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+
+      h4 {
+        overflow-wrap: anywhere;
+        color: var(--heading-color);
+      }
+
+      strong {
+        flex-shrink: 0;
+        color: var(--third-color);
+      }
+    }
+
+    .card-detail-attacks li > p {
+      margin-top: 0.65rem;
+      line-height: 1.5;
+      color: var(--paragraph-color);
+    }
+
+    .combat-stat-cost {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+
+      > strong {
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        color: var(--paragraph-color);
+      }
+
+      ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .card-detail-empty {
+        padding: 0.25rem 0.55rem;
+      }
+    }
+
+    .card-detail-weaknesses li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+
+      strong {
+        overflow-wrap: anywhere;
+        color: var(--heading-color);
+      }
+
+      span {
+        flex-shrink: 0;
+        font-weight: 700;
+        color: var(--third-color);
+      }
+    }
+
+    .combat-stat-empty {
+      padding: 1rem;
+      border-left: 3px solid var(--accent-secondary);
+      color: var(--paragraph-color);
+      background-color: var(--background-color-2);
+    }
+  }
+
+  .placeholder {
+    overflow: hidden;
+
+    .placeholder-block,
+    .placeholder-line {
+      background: linear-gradient(90deg, #d9d9d9 25%, #eeeeee 50%, #d9d9d9 75%);
+      background-size: 200% 100%;
+      animation: placeholder-loading 1.5s infinite;
+    }
+
+    .placeholder-line {
+      display: block;
+      width: 100%;
+      height: 1rem;
+      border-radius: 4px;
+    }
+
+    .placeholder-title {
+      width: 62%;
+      height: 2.3rem;
+    }
+
+    .placeholder-description {
+      width: 92%;
+    }
+
+    .placeholder-description-short {
+      width: 68%;
+    }
+
+    .placeholder-facts {
+      gap: 1px;
+      border: 0;
+      background-color: var(--accent-color);
+
+      .placeholder-line {
+        height: 3.4rem;
+        border-radius: 0;
+      }
+
+      .placeholder-line:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .placeholder-tags {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .placeholder-illustrator .placeholder-line {
+      width: 45%;
+    }
+
+    .placeholder-pill {
+      width: 72px;
+      height: 1.8rem;
+      border-radius: 999px;
+    }
+
+    &.combat-stats-placeholder {
+      .placeholder-section-title {
+        width: 40%;
+        height: 1.35rem;
+        margin-bottom: 1rem;
+      }
+
+      .placeholder-combat-row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.65rem;
+        padding: 1rem;
+        background-color: var(--background-color-2);
+      }
+    }
+  }
+
+  @media (max-width: 760px) {
+    min-height: 0;
+
+    .card-detail {
+      grid-template-columns: 1fr;
+    }
+
+    .card-detail-media {
+      width: 100%;
+      max-height: 500px;
+    }
+
+    .card-detail-combat-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .card-detail-content,
+    .card-detail-footer,
+    .card-detail-combat-stats {
+      padding: 1.25rem;
+    }
+
+    .card-detail-info,
+    .card-detail-groups {
+      grid-template-columns: 1fr;
+    }
+
+    .combat-stat-heading {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+  }
+
+  .card-footer {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: flex-end;
+    gap: 1rem;
+
+    .back-link {
+      padding: 0.5rem 1rem;
+      border: 1px solid var(--accent-color);
+      border-radius: 4px;
+      font-size: 0.9rem;
+      color: var(--accent-third);
+      background-color: var(--background-color-2);
+      transition: all 0.2s ease-in-out;
+
+      &:hover {
+        color: var(--background-color-1);
+        background-color: var(--accent-third);
+        box-shadow: 0 4px 12px rgb(20 54 66 / 12%);
+      }
+    }
+  }
+}

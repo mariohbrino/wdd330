@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Pokemon Cards Listing with Estimated Price"
+    />
+    <title>WDD330: Card</title>
+    <script type="module" src="./js/card.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <header class="navigation-menu">
+        <a href="./index.html">WDD330</a>
+        <ul>
+          <li>
+            <a href="./cards.html">Cards</a>
+          </li>
+          <li>
+            <a href="./siteplan.html">Site Plan</a>
+          </li>
+        </ul>
+      </header>
+      <main>
+        <h1>Card Details</h1>
+        <div id="card-details" class="card-details">
+          <template id="card-placeholder-template">
+            <article class="card-detail placeholder" aria-hidden="true">
+              <div class="card-detail-media placeholder-block"></div>
+              <div class="card-detail-content">
+                <div class="card-detail-header">
+                  <span class="placeholder-line placeholder-title"></span>
+                  <span class="placeholder-line placeholder-description"></span>
+                  <span
+                    class="placeholder-line placeholder-description-short"
+                  ></span>
+                </div>
+                <div class="card-detail-info placeholder-facts">
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line"></span>
+                </div>
+              </div>
+              <div class="card-detail-footer">
+                <div class="card-detail-illustrator placeholder-illustrator">
+                  <span class="placeholder-line"></span>
+                </div>
+                <div class="placeholder-tags">
+                  <span class="placeholder-pill placeholder-block"></span>
+                  <span class="placeholder-pill placeholder-block"></span>
+                  <span class="placeholder-pill placeholder-block"></span>
+                </div>
+              </div>
+            </article>
+            <article
+              class="card-detail-combat-stats combat-stats-placeholder placeholder"
+              aria-hidden="true"
+            >
+              <section>
+                <span class="placeholder-line placeholder-section-title"></span>
+                <div class="placeholder-combat-row">
+                  <span class="placeholder-line"></span>
+                  <span class="placeholder-line placeholder-description"></span>
+                  <span
+                    class="placeholder-line placeholder-description-short"
+                  ></span>
+                </div>
+              </section>
+              <section>
+                <span class="placeholder-line placeholder-section-title"></span>
+                <div class="placeholder-combat-row">
+                  <span class="placeholder-line"></span>
+                  <span
+                    class="placeholder-line placeholder-description-short"
+                  ></span>
+                </div>
+              </section>
+            </article>
+          </template>
+        </div>
+      </main>
+      <footer>
+        <p>&copy; 2026 Mario Brino</p>
+      </footer>
+    </div>
+  </body>
+</html>

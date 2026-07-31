@@ -1,4 +1,4 @@
-import ApiClient from "../http/api-client";
+import ListApiClient from "../http/list-api-client";
 
 class ListResource {
   constructor(
@@ -10,7 +10,7 @@ class ListResource {
     this.resourceId = resourceId;
     this.resourceKey = resourceKey;
     this.getResourcesCallback = getResourcesCallback;
-    this.apiClient = new ApiClient();
+    this.apiClient = new ListApiClient();
     this.renderCallback = null;
     this.items = [];
     this.data = null;
