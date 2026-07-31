@@ -1,7 +1,14 @@
 import ApiClient from "../http/api-client";
 
 class ListResource {
-  constructor(getResourcesCallback, defaultItemsPerPage = 6) {
+  constructor(
+    getResourcesCallback,
+    defaultItemsPerPage = 6,
+    resourceId = null,
+    resourceKey = null,
+  ) {
+    this.resourceId = resourceId;
+    this.resourceKey = resourceKey;
     this.getResourcesCallback = getResourcesCallback;
     this.apiClient = new ApiClient();
     this.renderCallback = null;
@@ -17,18 +24,36 @@ class ListResource {
   }
 
   init = async () => {
-    this.listenPagination();
     await this.getItems();
+    this.listenPagination();
   };
 
   getItems = async () => {
-    this.items = await this.getResourcesCallback(
-      this.apiClient,
+    const params = [this.apiClient];
+
+    if (this.resourceId) {
+      params.push(this.resourceId);
+    }
+
+    params.push(
       this.currentPage,
       this.itemsPerPage,
       this.sortField,
       this.sortOrder,
     );
+
+    const data = await this.getResourcesCallback(...params);
+
+    if (this.resourceKey) {
+      const resources = data[this.resourceKey] ?? [];
+      const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+      const endIndex = startIndex + this.itemsPerPage;
+
+      this.items = resources.slice(startIndex, endIndex);
+      this.hasNextPage = endIndex < resources.length;
+    } else {
+      this.items = data;
+    }
   };
 
   listenPagination = () => {
@@ -64,7 +89,9 @@ class ListResource {
       await this.getItems();
 
       if (this.items.length > 0) {
-        this.hasNextPage = this.items.length === this.itemsPerPage; // If less than full page, likely at the end
+        if (!this.resourceKey) {
+          this.hasNextPage = this.items.length === this.itemsPerPage;
+        }
         this.updatePaginationState(prevPaginate, nextPaginate);
         await this.render();
       } else {
