@@ -1,9 +1,9 @@
 import "../../css/sets.css";
 
-import ApiClient from "../http/api-client";
+import { ListResource } from "../libraries/list";
 import { getListSets } from "../services/sets";
 import { createPlaceholder } from "../utils/placeholder";
-import ListContainer from "./list-container";
+import { renderContainer } from "./render-container";
 
 const setLogoTemplate = (logoUrl) => {
   if (logoUrl) {
@@ -26,104 +26,15 @@ const setListTemplate = (set) => `
   </li>
 `;
 
-class ListSets {
-  constructor(defaultItemsPerPage = 6) {
-    this.sets = [];
-    this.apiClient = new ApiClient();
-
-    // Initialize from URL params or use defaults
-    const urlParams = this.apiClient.getCurrentUrlParams(defaultItemsPerPage);
-    this.currentPage = urlParams.page;
-    this.itemsPerPage = urlParams.itemsPerPage;
-    this.sortField = urlParams.sortField;
-    this.sortOrder = urlParams.sortOrder;
-    this.hasNextPage = true; // Track if there are more pages available
-  }
-
-  init = async () => {
-    this.listenPagination();
-    this.sets = await this.getSets();
-  };
-
-  getSets = async () => {
-    const sets = await getListSets(
-      this.apiClient,
-      this.currentPage,
-      this.itemsPerPage,
-      this.sortField,
-      this.sortOrder,
-    );
-    return sets;
-  };
-
-  listenPagination = () => {
-    const prevPaginate = document.getElementById("prev-paginate");
-    const nextPaginate = document.getElementById("next-paginate");
-
-    this.updatePaginationState(prevPaginate, nextPaginate);
-
-    this.handlePrevPagination(prevPaginate, nextPaginate);
-    this.handleNextPagination(nextPaginate, prevPaginate);
-  };
-
-  updatePaginationState = (prevBtn, nextBtn) => {
-    prevBtn.disabled = this.currentPage === 1;
-    nextBtn.disabled = !this.hasNextPage;
-  };
-
-  handlePrevPagination = (prevPaginate, nextPaginate) => {
-    prevPaginate.addEventListener("click", async () => {
-      if (this.currentPage > 1) {
-        this.currentPage--;
-        this.sets = await this.getSets();
-        this.hasNextPage = true; // Going back means there's at least one page forward
-        this.updatePaginationState(prevPaginate, nextPaginate);
-        this.render();
-      }
-    });
-  };
-
-  handleNextPagination = (nextPaginate, prevPaginate) => {
-    nextPaginate.addEventListener("click", async () => {
-      this.currentPage++;
-      const sets = await this.getSets();
-
-      if (sets.length > 0) {
-        this.sets = sets;
-        this.hasNextPage = sets.length === this.itemsPerPage; // If less than full page, likely at the end
-        this.updatePaginationState(prevPaginate, nextPaginate);
-        this.render();
-      } else {
-        // No results, revert the page increment
-        this.currentPage--;
-        this.hasNextPage = false; // No more pages available
-        this.updatePaginationState(prevPaginate, nextPaginate);
-      }
-    });
-  };
-
-  render = () => {
-    const listSet = document.getElementById("list-set");
-    listSet.innerHTML = ""; // Clear the list before rendering new sets
-    const listContainer = new ListContainer(
-      listSet,
-      this.sets.map((set) => setListTemplate(set)),
-      document.getElementById("set-placeholder-template"),
-      this.sets.length,
-    );
-    return listContainer.render();
-  };
-}
-
 const displaySets = async (defaultItemsPerPage = 6) => {
-  const listSetElement = document.getElementById("list-set");
-  const placeHolderTemplate = document.getElementById(
-    "set-placeholder-template",
-  );
-  createPlaceholder(listSetElement, placeHolderTemplate, defaultItemsPerPage);
-  const listSets = new ListSets(defaultItemsPerPage);
+  const element = document.getElementById("list-set");
+  const placeholder = document.getElementById("set-placeholder-template");
+
+  createPlaceholder(element, placeholder, defaultItemsPerPage);
+
+  const listSets = new ListResource(getListSets, defaultItemsPerPage);
   await listSets.init();
-  await listSets.render();
+  await listSets.render(renderContainer(element, placeholder, setListTemplate));
 };
 
 export { displaySets };

@@ -59,4 +59,4 @@ class ListContainer {
   };
 }
 
-export default ListContainer;
+export { ListContainer };
