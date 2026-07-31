@@ -1,9 +1,22 @@
 import endpoints from "../utils/endpoints.js";
+import { orderEnum } from "../utils/order.js";
 
-const getCards = async (apiService) => {
-  const response = await apiService.get(endpoints.cards);
+const getListCards = async (
+  apiService,
+  page = 1,
+  itemsPerPage = 12,
+  sortField = "name",
+  sortOrder = orderEnum.asc,
+) => {
+  const response = await apiService.get(
+    endpoints.cards,
+    page,
+    itemsPerPage,
+    sortField,
+    sortOrder,
+  );
   const data = await response.json();
   return data;
 };
 
-export { getCards };
+export { getListCards };
