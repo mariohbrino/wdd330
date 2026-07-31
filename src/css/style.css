@@ -4,11 +4,14 @@
 
   --primary-color: #e2de84;
   --secondary-color: #717147;
+  --third-color: #197bbd;
 
   --accent-primary: #e9e59b;
   --accent-secondary: #848465;
+  --accent-third: #143642;
 
-  --background-color: #f5f5f5;
+  --background-color-1: #eeeeee;
+  --background-color-2: #f5f5f5;
   --heading-color: #363636;
   --paragraph-color: #626267;
   --accent-color: #dbdbdb;
@@ -20,7 +23,7 @@
 }
 
 body {
-  background-color: var(--paragraph-color);
+  background-color: var(--background-color-1);
   font-family: var(--body-font);
 }
 
@@ -57,7 +60,7 @@ h3 {
 a {
   text-decoration: none;
   font-weight: 500;
-  color: var(--secondary-color);
+  color: var(--accent-third);
 }
 
 #app {
@@ -76,7 +79,7 @@ main {
   flex-grow: 1;
   padding: 2rem;
   box-sizing: border-box;
-  background-color: var(--background-color);
+  background-color: var(--background-color-2);
   border-left: 1px solid var(--accent-color);
   border-right: 1px solid var(--accent-color);
 }
@@ -87,7 +90,7 @@ footer {
   align-items: center;
   padding: 1rem;
   color: var(--accent-color);
-  background-color: var(--heading-color);
+  background-color: var(--accent-third);
 }
 
 section {
@@ -101,7 +104,7 @@ section {
   justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
-  background-color: var(--heading-color);
+  background-color: var(--accent-third);
 
   a {
     color: var(--accent-color);
@@ -110,7 +113,13 @@ section {
     transition: color 0.3s;
 
     &:hover {
-      color: var(--accent-primary);
+      color: var(--primary-color);
+    }
+
+    &:focus-visible {
+      color: var(--primary-color);
+      outline: 2px solid var(--primary-color);
+      outline-offset: 4px;
     }
   }
 
@@ -149,16 +158,20 @@ section {
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    color: var(--background-color);
-    background-color: var(--heading-color);
+    color: var(--background-color-2);
+    background-color: var(--third-color);
     transition:
       background-color 0.3s ease,
       opacity 0.3s ease,
       transform 0.2s ease;
 
     &:hover:not(:disabled) {
-      background-color: var(--paragraph-color);
       transform: translateY(-2px);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--accent-primary);
+      outline-offset: 2px;
     }
 
     &:active:not(:disabled) {
@@ -167,7 +180,7 @@ section {
 
     &.active {
       font-weight: bold;
-      color: var(--accent-secondary);
+      color: var(--accent-third);
       background-color: var(--accent-primary);
     }
 
