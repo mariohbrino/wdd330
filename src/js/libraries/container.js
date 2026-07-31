@@ -7,12 +7,14 @@ class ListContainer {
     placeHolderTemplate,
     placeHolderCount = 9,
     delay = 150,
+    eventCallback = null,
   ) {
     this.container = container;
     this.items = items;
     this.placeHolderTemplate = placeHolderTemplate;
     this.placeHolderCount = placeHolderCount;
     this.delayDuration = delay;
+    this.eventCallback = eventCallback;
   }
 
   clearContainer() {
@@ -50,6 +52,8 @@ class ListContainer {
         throw new Error("Not enough items to fill placeholders");
       }
     }
+
+    this.eventCallback?.();
   };
 
   render = () => {
