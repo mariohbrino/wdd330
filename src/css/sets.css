@@ -144,13 +144,3 @@
     }
   }
 }
-
-@keyframes placeholder-loading {
-  from {
-    background-position: 200% 0;
-  }
-
-  to {
-    background-position: -200% 0;
-  }
-}

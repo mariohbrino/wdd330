@@ -1,6 +1,6 @@
 import { orderEnum } from "../utils/order.js";
 
-class ApiClient {
+class ListApiClient {
   async get(
     endpoint,
     page = 1,
@@ -61,4 +61,4 @@ class ApiClient {
   }
 }
 
-export default ApiClient;
+export default ListApiClient;
