@@ -20,11 +20,18 @@ const tagsTemplate = (items) => {
 };
 
 const imageTemplate = (imageUrl, altText) => {
-  if (!imageUrl) {
-    return `<div class="card-detail-image-placeholder">No image available</div>`;
+  if (imageUrl) {
+    return `
+      <img src="${imageUrl}/low.webp" alt="${altText}">
+      <button class="zoom-image-button" data-image-url="${imageUrl}" aria-label="Zoom image">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607ZM10.5 7.5v6m3-3h-6" />
+        </svg>
+        <span class="hidden">Zoom image</span>
+      </button>
+    `;
   }
-
-  return `<img src="${imageUrl}" alt="${altText}" />`;
+  return "<span>No image available</span>";
 };
 
 const displayAttacksTemplate = (attacks) => {
@@ -82,7 +89,7 @@ const cardTemplate = (element, setId, card) => {
   element.innerHTML = `
     <article class="card-detail">
       <div class="card-detail-media">
-        ${imageTemplate(card.image ? `${card.image}/low.webp` : null, card.name)}
+        ${imageTemplate(card.image, card.name)}
       </div>
       <div class="card-detail-content">
         <div class="card-detail-header">
@@ -128,6 +135,23 @@ const cardTemplate = (element, setId, card) => {
   `;
 };
 
+const addZoomEventListener = () => {
+  const zoomButton = document.querySelector(".zoom-image-button");
+  const modal = document.getElementById("image-modal");
+  const modalImage = document.getElementById("modal-image");
+  const closeModalBtn = document.getElementById("closeModalBtn");
+
+  zoomButton.addEventListener("click", () => {
+    const imageUrl = zoomButton.getAttribute("data-image-url");
+    modalImage.innerHTML = `<img src="${imageUrl}/high.webp" alt="Zoomed image">`;
+    modal.showModal();
+  });
+
+  closeModalBtn.addEventListener("click", () => {
+    modal.close();
+  });
+};
+
 const displayCardDetails = async (element, setId, cardLocalId) => {
   const placeholderTemplate = document.getElementById(
     "card-placeholder-template",
@@ -139,6 +163,7 @@ const displayCardDetails = async (element, setId, cardLocalId) => {
   const cardDetails = await getCardDetails(apiService, setId, cardLocalId);
 
   cardTemplate(element, setId, cardDetails);
+  addZoomEventListener();
 };
 
 export { displayCardDetails };

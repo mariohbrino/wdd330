@@ -18,8 +18,8 @@ const getSetAndCardIds = () => {
   return { setId, cardLocalId };
 };
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
   const element = document.getElementById("card-details");
   const { setId, cardLocalId } = getSetAndCardIds();
-  displayCardDetails(element, setId, cardLocalId);
+  await displayCardDetails(element, setId, cardLocalId);
 });
