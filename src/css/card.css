@@ -140,22 +140,22 @@
         font-size: 0.9rem;
         color: var(--heading-color);
       }
+    }
+  }
 
-      .card-detail-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
+  .card-detail-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
 
-        > li {
-          padding: 0.35rem 0.65rem;
-          border: 1px solid var(--accent-secondary);
-          border-radius: 999px;
-          font-size: 0.85rem;
-          line-height: 1.2;
-          color: var(--accent-third);
-          background-color: var(--accent-primary);
-        }
-      }
+    > li {
+      padding: 0.35rem 0.65rem;
+      border: 1px solid var(--accent-secondary);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      line-height: 1.2;
+      color: var(--accent-third);
+      background-color: var(--accent-primary);
     }
   }
 
