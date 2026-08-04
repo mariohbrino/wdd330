@@ -69,7 +69,7 @@ const addWhishlistEventListeners = () => {
 
 const displaySet = async (setId, defaultItemsPerPage = 6) => {
   const element = document.getElementById("list-set");
-  const placeholder = document.getElementById("set-placeholder-template");
+  const placeholder = document.getElementById("card-placeholder-template");
 
   createPlaceholder(element, placeholder, defaultItemsPerPage);
 
@@ -81,7 +81,7 @@ const displaySet = async (setId, defaultItemsPerPage = 6) => {
   );
   await listSets.init();
   await listSets.render(
-    renderContainer(element, placeholder, cardListTemplate(setId), 50, () => {
+    renderContainer(element, placeholder, cardListTemplate(setId), 150, () => {
       addWhishlistEventListeners();
       addZoomEventListeners();
     }),

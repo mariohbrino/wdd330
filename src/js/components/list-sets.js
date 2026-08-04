@@ -84,7 +84,7 @@ const displaySets = async (defaultItemsPerPage = 6) => {
       element,
       placeholder,
       setListTemplate,
-      50,
+      150,
       addFavoriteButtonEventListener,
     ),
   );
