@@ -1,6 +1,9 @@
 import { ObjectApiClient } from "../http/object-api-client.js";
+import { toggleWishlistStatus } from "../libraries/toggle-whishlist.js";
+import { isWhishlistCard } from "../libraries/whishlist-card.js";
 import { getCardDetails } from "../services/card.js";
 import { createPlaceholder } from "../utils/placeholder.js";
+import { whishlistIcon, whishlistSolidIcon } from "./whishlist-icons.js";
 
 const convertObjectToArray = (items) =>
   Object.entries(items || {})
@@ -96,6 +99,9 @@ const cardTemplate = (element, setId, card) => {
           <p class="card-detail-eyebrow">${card.category || "Pokemon card"}</p>
           <h2>${card.name || "Not available"}</h2>
           <p>${card.description || "No description available."}</p>
+          <button class="whishlist-button${isWhishlistCard(card.id) ? " whishlist" : ""}" data-card-id="${card.id}" data-is-whishlist="${isWhishlistCard(card.id)}" aria-label="Add to whishlist">
+            ${isWhishlistCard(card.id) ? whishlistSolidIcon : whishlistIcon}
+          </button>
         </div>
         <dl class="card-detail-info">
           <div><dt>Type</dt><dd>${card.type || "Unknown"}</dd></div>
@@ -152,6 +158,13 @@ const addZoomEventListener = () => {
   });
 };
 
+const addWhishlistEventListener = () => {
+  const favoriteButton = document.querySelectorAll(".whishlist-button");
+  favoriteButton.forEach((element) => {
+    element.addEventListener("click", toggleWishlistStatus);
+  });
+};
+
 const displayCardDetails = async (element, setId, cardLocalId) => {
   const placeholderTemplate = document.getElementById(
     "card-placeholder-template",
@@ -164,6 +177,7 @@ const displayCardDetails = async (element, setId, cardLocalId) => {
 
   cardTemplate(element, setId, cardDetails);
   addZoomEventListener();
+  addWhishlistEventListener();
 };
 
 export { displayCardDetails };
