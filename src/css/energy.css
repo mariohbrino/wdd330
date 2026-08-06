@@ -1,0 +1,51 @@
+.energy-icon {
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  flex: 0 0 25px;
+  background-image: url("../images/energy-types.png");
+}
+
+.icon-fire {
+  background-position: 0px 0px;
+}
+
+.icon-dragon {
+  background-position: 0px -25px;
+}
+
+.icon-darkness {
+  background-position: 0px -50px;
+}
+
+.icon-colorless {
+  background-position: -25px 0px;
+}
+
+.icon-fairy {
+  background-position: -50px 0px;
+}
+
+.icon-metal {
+  background-position: -75px 0px;
+}
+
+.icon-grass {
+  background-position: -25px -50px;
+}
+
+.icon-water {
+  background-position: -75px -50px;
+}
+
+.icon-lightning {
+  background-position: -50px -50px;
+}
+
+.icon-fighting {
+  background-position: -50px -25px;
+}
+
+.icon-psychic {
+  background-position: -75px -25px;
+}

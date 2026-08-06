@@ -10,6 +10,34 @@ const convertObjectToArray = (items) =>
     .filter(([, isAvailable]) => isAvailable)
     .map(([name]) => name.replace(/([A-Z])/g, " $1"));
 
+const energeIcons = {
+  fire: "icon-fire",
+  dragon: "icon-dragon",
+  darkness: "icon-darkness",
+  colorless: "icon-colorless",
+  fairy: "icon-fairy",
+  metal: "icon-metal",
+  grass: "icon-grass",
+  water: "icon-water",
+  lightning: "icon-lightning",
+  fighting: "icon-fighting",
+  psychic: "icon-psychic",
+};
+
+const energyIconTemplate = (type) => {
+  const iconClass = energeIcons[type.toLowerCase()];
+  return iconClass ? `<span class="energy-icon ${iconClass}"></span>` : "";
+};
+
+const energyIconsTemplate = (types) => {
+  if (!types || types.length === 0) {
+    return `<span class="card-detail-empty">None</span>`;
+  }
+  return `<ul class="card-detail-energy-icons">${types
+    .map((type) => `<li>${energyIconTemplate(type)}</li>`)
+    .join("")}</ul>`;
+};
+
 const tagsTemplate = (items) => {
   const tags = Array.isArray(items) ? items : convertObjectToArray(items);
 
@@ -49,7 +77,7 @@ const displayAttacksTemplate = (attacks) => {
         <p>${attack.effect || "No effect description available."}</p>
         <div class="combat-stat-cost">
           <p><strong>Cost:</strong></p>
-          ${tagsTemplate(attack.cost)}
+          ${energyIconsTemplate(attack.cost)}
         </div>
       </li>
     `,
@@ -76,7 +104,7 @@ const displayWeaknessesTemplate = (weaknesses) => `
         .map(
           (weakness) => `
         <li>
-          <strong>${weakness.type}</strong>
+          ${energyIconTemplate(weakness.type)}
           <span>${weakness.value || "N/A"}</span>
         </li>
       `,
@@ -99,7 +127,12 @@ const cardTemplate = (element, setId, card) => {
           <p class="card-detail-eyebrow">${card.category || "Pokemon card"}</p>
           <h2>${card.name || "Not available"}</h2>
           <p>${card.description || "No description available."}</p>
-          <button class="whishlist-button${isWhishlistCard(card.id) ? " whishlist" : ""}" data-card-id="${card.id}" data-is-whishlist="${isWhishlistCard(card.id)}" aria-label="Add to whishlist">
+          <button
+            class="whishlist-button${isWhishlistCard(card.id) ? " whishlist" : ""}"
+            data-card-id="${card.id}"
+            data-is-whishlist="${isWhishlistCard(card.id)}"
+            aria-label="Add to whishlist"
+          >
             ${isWhishlistCard(card.id) ? whishlistSolidIcon : whishlistIcon}
           </button>
         </div>
@@ -118,7 +151,7 @@ const cardTemplate = (element, setId, card) => {
         <div class="card-detail-groups">
           <section>
             <h3>Types</h3>
-            ${tagsTemplate(card.types)}
+            ${energyIconsTemplate(card.types)}
           </section>
           <section>
             <h3>Variants</h3>

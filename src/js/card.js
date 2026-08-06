@@ -1,4 +1,5 @@
 import "../css/card.css";
+import "../css/energy.css";
 import "../css/style.css";
 
 import { displayCardDetails } from "./components/card-details.js";
